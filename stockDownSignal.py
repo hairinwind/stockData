@@ -24,6 +24,8 @@ def medianFirstDayFor3DaysDown(symbol, period) :
     """
     data = readCsv(symbol, period * 31) # no need to be 100% accurate 
     print(len(data))
+    data['change'] = data.close - data.close.shift(-1)
+    data['firstOf3Down'] = data.change < 0 and data.change.shift(-1) < 0 and data.change.shift(-2) < 0
     print(data.head(5))
 
 
